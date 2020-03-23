@@ -1,0 +1,25 @@
+@for $i from 1 through 8 {
+	$j: $i * 0.5;
+	.p-#{$j} {
+		padding: #{$j}rem;
+	}
+	.p-y-#{$j} {
+		padding-top: #{$j}rem;
+		padding-bottom: #{$j}rem;
+	}
+	.p-x-#{$j} {
+		padding-left: #{$j}rem;
+		padding-right: #{$j}rem;
+	}
+	.m-#{$j} {
+		margin: #{$j}rem;
+	}
+	.m-y-#{$j} {
+		margin-top: #{$j}rem;
+		margin-bottom: #{$j}rem;
+	}
+	.m-x-#{$j} {
+		margin-left: #{$j}rem;
+		margin-right: #{$j}rem;
+	}
+}

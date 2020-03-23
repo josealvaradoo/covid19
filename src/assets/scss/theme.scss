@@ -1,0 +1,23 @@
+body,
+.App {
+	--item-background: #FFFFFF;
+	// --primary-color: #3F51B5;
+	--primary-color: #4CAF50;
+	--success-color: #4CAF50;
+	--danger-color: #F44336;
+	--warning-color: #FFC107;
+	// --main-background: rgb(211, 228, 238);
+	--coronavirus-enabled: var(--primary-color);
+	--coronavirus-disabled: #EEEEEE;
+	--main-background: white;
+	--border: 1px solid #ccc;
+	&.dark {
+		--primary-color: var(--danger-color);
+		--success-color: #4CAF50;
+		--danger-color: #F44336;
+		--warning-color: #FFC107;
+		--main-background: rgb(53, 54, 54);
+		--item-background: #AAAAAA;
+		--border: 1px solid #ccc;
+	}
+}

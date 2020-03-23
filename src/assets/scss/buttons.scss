@@ -1,0 +1,51 @@
+button[class*=button],
+a[class*=button] {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0;
+	outline: none;
+	padding: $padding-button;
+	font-size: .9rem;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+	border-radius: $border-radius;
+	&.float {
+		position: fixed;
+		bottom: 1rem;
+		right: 1rem;
+		box-shadow: $shadow-1;
+	}
+	&.circle {
+		width: 60px;
+		height: 60px;
+		border-radius: 100px;
+	}
+	&.primary {
+		background-color: var(--primary-color);
+		color: white;
+	}
+	&.success {
+		background-color: var(--success-color);
+		color: white;
+	}
+	&.warning {
+		background-color: var(--warning-color);
+		color: white;
+	}
+	&.danger {
+		background-color: var(--danger-color);
+		color: white;
+	}
+	&.full {
+		width: 100%;
+	}
+	&.ghost {
+		background: none;
+		color: #000;
+	}
+	&.small {
+		padding: .75rem;
+	}
+}

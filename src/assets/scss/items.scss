@@ -1,0 +1,29 @@
+.item {
+	margin-bottom: 1rem;
+	background-color: var(--item-background);
+	border-radius: .5rem;
+	padding: .5rem;
+	box-shadow: $shadow-1;
+	&-heading {
+		font-weight: bold;
+	}
+	&-content {
+		font-size: 1.2rem;
+		font-weight: 100;
+	}
+}
+
+.drawer-list__item {
+	a {
+		display: block;
+		padding: 1rem 2rem;
+		text-decoration: none;
+		color: inherit
+	}
+	[class*=fa] {
+		margin-right: 1rem;
+	}
+	&:hover {
+		background-color: #EEEEEE;
+	}
+}

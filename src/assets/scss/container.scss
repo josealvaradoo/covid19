@@ -1,0 +1,28 @@
+.container {
+	padding: 1rem;
+	&.full {
+		height: calc(100% - 32px);
+	}
+	&.cross-center {
+		display: flex;
+		align-items: center;
+	}
+	&.direction-column {
+		display: flex;
+		flex-direction: column;
+	}
+}
+.height-limit {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	max-height: 50vh;
+  min-height: 50vh;
+	overflow-y: auto;
+	@media screen and (min-width: $bp-small) {
+		max-height: calc(100vh - 100px);
+  	min-height: calc(100vh - 100px);
+		height: 100%;
+	}
+}
