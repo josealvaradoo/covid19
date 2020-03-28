@@ -1,15 +1,28 @@
 .item {
+	position: relative;
 	margin-bottom: 1rem;
 	background-color: var(--item-background);
-	border-radius: .5rem;
-	padding: .5rem;
+	border-radius: .55rem;
+	padding: 1rem;
 	box-shadow: $shadow-1;
 	&-heading {
 		font-weight: bold;
 	}
 	&-content {
-		font-size: 1.2rem;
+		font-size: .875rem;
 		font-weight: 100;
+	}
+	&-entry {
+		--color: #CCC;
+		display: inline-block;
+		position: absolute;
+		right: 1rem;
+		width: .5rem;
+		height: .5rem;
+		top: calc(50% - .25rem);
+		border-top: var(--border);
+		border-right: var(--border);
+		transform: rotate(45deg);
 	}
 }
 

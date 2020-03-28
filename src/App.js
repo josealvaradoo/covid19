@@ -4,13 +4,14 @@ import Router from './router'
 import Header from './components/header/header'
 import Drawer from './components/drawer/drawer'
 import Notification from './components/notifications/notification'
+import Navbar from './components/navbar/navbar'
 
 const App = ({menuIsOpen, notification}) => (
 	<div className="App">
 	<Header />
-	{menuIsOpen && <Drawer />}
 	{notification.code && <Notification />}
 	<Router />
+	<Navbar />
 	</div>
 )
 

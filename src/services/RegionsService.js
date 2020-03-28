@@ -1,5 +1,5 @@
 import Firebase from 'firebase'
-import { v4 as uuid4 } from "uuid";
+// import { v4 as uuid4 } from "uuid";
 
 export default class RegionsService {
 	static async fetchData() {
@@ -25,6 +25,7 @@ export default class RegionsService {
 		return snapshot.data();
 	}
 
+	/*
 	static async migrate() {
 		const regions = [
 			"Amazonas", "Anzoategui", "Apure", "Aragua", "Barinas", "Bolivar", "Carabobo", "Caracas",
@@ -45,4 +46,5 @@ export default class RegionsService {
 			})
 		})
 	}
+	*/
 }

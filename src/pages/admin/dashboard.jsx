@@ -21,9 +21,11 @@ const Dashboard = ({setRegionsToReduxStore, regionsState}) => {
 
 	useEffect(() => {
 		(async function() {
-			await fetchRegions()
+			if(!pageLoaded) {
+				await fetchRegions()
+			}
 		})()
-	}, []) // eslint-disable-line
+	}, [pageLoaded]) // eslint-disable-line
 
 	const fetchRegions = async () => {
 		if(regionsState.length === 0) {
@@ -46,8 +48,8 @@ const Dashboard = ({setRegionsToReduxStore, regionsState}) => {
 		const _case = await CasesService.getByRegionId(regionId)
 		
 		if(!_case) {
-			const region = await RegionsService.getById(regionId)
-			return setlectCase(await CasesService.create({death: 0, healted: 0, cases: 0, state_id: regionId, state: region.name}))
+			const region = regions.find(item => item.value === regionId)
+			return setlectCase(await CasesService.create({death: 0, healted: 0, cases: 0, state_id: regionId, state: region.label}))
 		}
 
 		setlectCase(_case)

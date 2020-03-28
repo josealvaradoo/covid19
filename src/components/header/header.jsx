@@ -1,21 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {toggleMenu} from './../../redux/ducks/menu'
-import BurgerMenu from './../buttons/burger'
+import EDcontainer from './../grid/ed-container'
+import EDitem from '../grid/ed-item'
+import AppTitle from '../typography/app-title.'
 
-const Header = ({toggle}) => (
+const Header = ({}) => (
 	<header className="header">
-		COVID-19 en Venezuela
-		<BurgerMenu onClick={toggle} />
+		<EDcontainer sMain="center">
+			<EDitem sMain="center">
+				<AppTitle>Coronvairus <span className="title-1--primary">Venezuela</span></AppTitle>
+			</EDitem>
+		</EDcontainer>
 	</header>
 )
 
 const mapStateToProps = state => ({})
 
-const mapDispatchToProps = dispatch => ({
-	toggle() {
-		dispatch(toggleMenu())
-	} 
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

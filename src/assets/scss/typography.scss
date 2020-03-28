@@ -1,0 +1,33 @@
+.title-1 {
+	color: #000;
+	font-size: 1.5rem;
+	&--primary {
+		color: var(--primary-color);
+		font-weight: bold;
+	}
+}
+.description {
+	font-size: .875rem;
+	color: #999999;
+}
+.label {
+	font-size: .75rem;
+	color: #000;
+}
+.title {
+	font-size: 1.625rem;
+	color: #000;
+	font-weight: bold;
+}
+.subtitle {
+	font-size: .875rem;
+	color: #000
+}
+.figure {
+	font-size: 1.75rem;
+	color: #000;
+	font-weight: bold;
+}
+.text-disabled {
+	color: #AAA;
+}

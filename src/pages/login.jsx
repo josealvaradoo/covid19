@@ -15,12 +15,14 @@ import EDitem from '../components/grid/ed-item';
 
 const Login = ({error, user}) => {
 	const signIn = async (e) => {
-		e.preventDefault()
-		const email = e.target.email.value
-		const passw = e.target.password.value
+		if(!user) {
+			e.preventDefault()
+			const email = e.target.email.value
+			const passw = e.target.password.value
 
-		await AuthenticationService.signIn(email, passw)
-		return false
+			await AuthenticationService.signIn(email, passw)
+			return false
+		}
 	}
 
 	return !user ? (

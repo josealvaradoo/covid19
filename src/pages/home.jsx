@@ -1,14 +1,15 @@
 import React, { useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import VenezuelaMap from '../components/map/venezuela-map';
-import CasesService from '../services/CasesService';
-import FloatButton from '../components/buttons/float-button';
-import Icon from '../components/icons/icon';
-import CasesList from '../components/lists/cases-list';
-import Item, { ItemContent, ItemHeading } from '../components/items/item';
-import EDGrid from '../components/grid/ed-grid';
-import EDcolumn from '../components/grid/ed-column';
+import VenezuelaMap from '../components/map/venezuela-map'
+import CasesService from '../services/CasesService'
+import Card from '../components/cards/cards'
+import Item, { ItemContent, ItemHeading } from '../components/items/item'
+import EDGrid from '../components/grid/ed-grid'
+import EDcontainer from '../components/grid/ed-container'
+import EDcolumn from '../components/grid/ed-column'
+import EDitem from '../components/grid/ed-item'
+import Carrousel, { CarrouselItem } from '../components/carrousel/carrousel'
 
 const Home = ({user}) => {
 	const [cases, setCases] = useState([])
@@ -16,13 +17,17 @@ const Home = ({user}) => {
 
 	useEffect(() => {
 		(async () => {
-			let _total = 0
-			const data = await CasesService.fetchData()
+			/*
+			if(cases.length === 0) {
+				let _total = 0
+				const data = await CasesService.fetchData()
 
-			data.map(elem => _total += Number(elem.cases))
+				data.map(elem => _total += Number(elem.cases))
 
-			setCases(data)
-			setTotalCases(_total)
+				setCases(data)
+				setTotalCases(_total)
+			}
+			*/
 		})()
 	}, [])
 
@@ -33,22 +38,31 @@ const Home = ({user}) => {
 				<VenezuelaMap cases={cases} />
 			</EDcolumn>
 			<EDcolumn>
-			{
-				cases.length > 0 && (
-				<EDGrid>
-					<div className="height-limit">
-						<Item>
-							<ItemHeading>Venezuela</ItemHeading>
-							<ItemContent>{total} casos</ItemContent>
-						</Item>
-						<CasesList cases={cases} />
-					</div>
-				</EDGrid>
-				)
-			}
+				<Item>
+					<ItemHeading>Resumen General</ItemHeading>
+					<ItemContent className="description">{total} casos confirmados a nivel nacional</ItemContent>
+				</Item>
+			</EDcolumn>
+			<EDcolumn>
+				<Carrousel>
+					<CarrouselItem>
+						<Card image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">Caracas</Card>
+					</CarrouselItem>
+					<CarrouselItem>
+						<Card image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">Nueva Esparta</Card>
+					</CarrouselItem>
+					<CarrouselItem>
+						<Card image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">Delta Amacuro</Card>
+					</CarrouselItem>
+					<CarrouselItem>
+						<Card image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">Los Roques</Card>
+					</CarrouselItem>
+					<CarrouselItem>
+						<Card image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">Caracas</Card>
+					</CarrouselItem>
+				</Carrousel>
 			</EDcolumn>
 		</EDGrid>
-		{user && <FloatButton type="circle" link to="/admin/dashboard"><Icon icon="plus" type="fas" /></FloatButton>}
 		</>
 	)
 }

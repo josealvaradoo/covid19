@@ -3,13 +3,15 @@ import {connect} from 'react-redux'
 import AuthenticationService from '../services/AuthenticationService';
 import { Redirect } from 'react-router-dom';
 
-const Logout = () => {
+const Logout = ({user}) => {
 	const [redirect, setRedirectState] = useState(false)
 	
 	useEffect(() => {
 		(async () => {
-			const data = await AuthenticationService.signOut()
-			setRedirectState(data)
+			if(user) {
+				const data = await AuthenticationService.signOut()
+				setRedirectState(data)
+			}
 		})()
 	}, [])
 
@@ -20,7 +22,9 @@ Logout.defaultProps = {}
 
 Logout.propTypes = {}
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+	user: state.user
+})
 
 const mapDispatchToProps = dispatch => ({})
 
