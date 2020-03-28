@@ -6,25 +6,41 @@
 		font-weight: bold;
 	}
 }
-.description {
-	font-size: .875rem;
+[class^=typography] {
+	text-align: center;
+	width: 100%;
+}
+.description,
+.typography--description {
+	margin: 0;
+	padding: 0;
+	font-size: .75rem;
 	color: #999999;
 }
-.label {
+.label,
+.typography--label {
 	font-size: .75rem;
 	color: #000;
 }
-.title {
+.title,
+.typography--title {
 	font-size: 1.625rem;
 	color: #000;
 	font-weight: bold;
 }
-.subtitle {
+.subtitle,
+.typography--subtitle {
+	margin: 0;
+	padding: 0;
 	font-size: .875rem;
 	color: #000
 }
-.figure {
+.figure,
+.typography--figure {
+	margin: 0;
+	padding: 0;
 	font-size: 1.75rem;
+	line-height: 1;
 	color: #000;
 	font-weight: bold;
 }

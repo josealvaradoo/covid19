@@ -3,12 +3,11 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import VenezuelaMap from '../components/map/venezuela-map'
 import CasesService from '../services/CasesService'
+import Header from './../components/header/header'
 import Card from '../components/cards/cards'
 import Item, { ItemContent, ItemHeading } from '../components/items/item'
 import EDGrid from '../components/grid/ed-grid'
-import EDcontainer from '../components/grid/ed-container'
 import EDcolumn from '../components/grid/ed-column'
-import EDitem from '../components/grid/ed-item'
 import Carrousel, { CarrouselItem } from '../components/carrousel/carrousel'
 
 const Home = ({user}) => {
@@ -33,6 +32,7 @@ const Home = ({user}) => {
 
 	return (
 		<>
+		<Header />
 		<EDGrid m={2}>
 			<EDcolumn>
 				<VenezuelaMap cases={cases} />

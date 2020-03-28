@@ -11,6 +11,18 @@
 		padding-left: #{$j}rem;
 		padding-right: #{$j}rem;
 	}
+	.p-b-#{$j} {
+		padding-bottom: #{$j}rem;
+	}
+	.p-t-#{$j} {
+		padding-top: #{$j}rem;
+	}
+	.p-l-#{$j} {
+		padding-left: #{$j}rem;
+	}
+	.p-r-#{$j} {
+		padding-right: #{$j}rem;
+	}
 	.m-#{$j} {
 		margin: #{$j}rem;
 	}
@@ -21,5 +33,45 @@
 	.m-x-#{$j} {
 		margin-left: #{$j}rem;
 		margin-right: #{$j}rem;
+	}
+	.m-b-#{$j} {
+		margin-bottom: #{$j}rem;
+	}
+	.m-t-#{$j} {
+		margin-top: #{$j}rem;
+	}
+	.m-l-#{$j} {
+		margin-left: #{$j}rem;
+	}
+	.m-r-#{$j} {
+		margin-right: #{$j}rem;
+	}
+}
+
+@for $i from 10 through 100 {
+	@if $i % 5 == 0 {
+		.height--#{$i} {
+			height: percentage($i/100);
+		}
+	}
+}
+	
+@for $i from 0 through 4 {
+	@for $j from 0 through 4 {
+		.divider--#{$i}--#{$j} {
+			display: table;
+			margin: auto;
+			margin-top: #{$j}rem;
+			margin-bottom: #{$j}rem;
+			border-bottom: 1px solid #EEE;
+			width: calc(100% - #{$i}rem);
+		}
+	}
+}
+
+[class*=scroll] {
+	overflow-y: scroll;
+	&--auto {
+		overflow-y: auto;
 	}
 }

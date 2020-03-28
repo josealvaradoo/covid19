@@ -5,15 +5,16 @@ import Home from './pages/home'
 import Dashboard from './pages/admin/dashboard'
 import Login from './pages/login'
 import Logout from './pages/logout'
-import FeaturedRegion from './pages/featured'
+import Resumen from './pages/resumen'
+import DetailRegion from './pages/detail'
 
 const Router = props => (
 	<BrowserRouter>
 		<Switch>
-			<Route exact path="/" component={Home} />
+			<Route exact path="/" component={Resumen} />
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/logout" component={Logout} />
-			<Route exact path="/region/:region" component={FeaturedRegion} />
+			<Route exact path="/region/:region" component={DetailRegion} />
 			<ProtectedRoute exact path="/admin/dashboard" component={Dashboard} />
 		</Switch>
 	</BrowserRouter>
