@@ -12,7 +12,7 @@ import DetailRegion from './pages/detail'
 const Router = props => (
 	<BrowserRouter>
 		<Switch>
-			<Route exact path="/" component={Notifications} />
+			<Route exact path="/" component={Login} />
 			<Route exact path="/login" component={Login} />
 			<Route exact path="/logout" component={Logout} />
 			<Route exact path="/region/:region" component={DetailRegion} />

@@ -1,11 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import Header from './../components/header/header'
 import Form from '../components/forms/form';
 import FormGroup from '../components/forms/form-group';
 import Input from '../components/inputs/input';
 import Button from '../components/buttons/button';
-import coronavirusPNG from './../assets/images/coronavirus.png'
+import doctorsPNG from './../assets/images/doctors.png'
 import Image from '../components/image/image';
 import AuthenticationService from '../services/AuthenticationService';
 import { Redirect } from 'react-router-dom';
@@ -27,9 +28,10 @@ const Login = ({error, user}) => {
 
 	return !user ? (
 		<EDGrid s={1}>
+			<Header />
 			<EDContainer>
 				<EDitem sMain="center">
-					<Image src={coronavirusPNG} alt="Coronavirus" width={80} maxWidth={300} className="coronavirus-login" />
+					<Image src={doctorsPNG} alt="Coronavirus" width={90} maxWidth={300} className="coronavirus-login" />
 				</EDitem>
 			</EDContainer>
 			<EDitem container full sMain="center">
