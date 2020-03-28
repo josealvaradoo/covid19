@@ -1,19 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Badge = ({color, children, className}) => (
-	<div className={`badge ${color} ${className}`}>{children}</div>
+const Badge = ({color, children, size, className, ...rest}) => (
+	<div className={`badge--${size} ${color} ${className}`} {...rest}>{children}</div>
 );
 
 Badge.defaultProps = {
+	size: "medium",
 	color: "primary",
 	children: "",
 	className: ""
 }
 
 Badge.propTypes = {
+	size: PropTypes.oneOf(["small", "medium"]),
 	color: PropTypes.oneOf(["primary", "success", "danger", "warning"]),
-	children: PropTypes.any,
+	children: PropTypes.node,
 	className: PropTypes.string
 }
 

@@ -7,36 +7,45 @@
 	}
 }
 [class^=typography] {
-	text-align: center;
 	width: 100%;
 }
+.span,
 .description,
-.typography--description {
+.typography--description,
+.span--description {
 	margin: 0;
 	padding: 0;
 	font-size: .75rem;
 	color: #999999;
 }
+.span,
 .label,
-.typography--label {
+.typography--label,
+.span--label {
 	font-size: .75rem;
 	color: #000;
 }
+.span,
 .title,
-.typography--title {
+.typography--title,
+.span--title {
 	font-size: 1.625rem;
 	color: #000;
 	font-weight: bold;
 }
+.span,
 .subtitle,
-.typography--subtitle {
+.typography--subtitle,
+.span--subtitle {
 	margin: 0;
 	padding: 0;
 	font-size: .875rem;
 	color: #000
 }
+.span,
 .figure,
-.typography--figure {
+.typography--figure,
+.span--figure {
 	margin: 0;
 	padding: 0;
 	font-size: 1.75rem;
@@ -46,4 +55,16 @@
 }
 .text-disabled {
 	color: #AAA;
+}
+.text-center {
+	text-align: center;
+}
+.text-justify {
+	text-align: justify;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
 }

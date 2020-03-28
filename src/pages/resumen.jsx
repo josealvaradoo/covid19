@@ -17,26 +17,26 @@ const Resumen = ({user}) => {
 		</DetailHeader>
 		<EDContainer>
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Resumen</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Resumen</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={3}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">109</Typography>
-							<Typography variant="description">Casos</Typography>
+							<Typography align="center" variant="figure">109</Typography>
+							<Typography align="center" variant="description">Casos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1</Typography>
-							<Typography variant="description">Fallecidos</Typography>
+							<Typography align="center" variant="figure">1</Typography>
+							<Typography align="center" variant="description">Fallecidos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1</Typography>
-							<Typography variant="description">Sanados</Typography>
+							<Typography align="center" variant="figure">1</Typography>
+							<Typography align="center" variant="description">Sanados</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>
@@ -47,20 +47,20 @@ const Resumen = ({user}) => {
 			</EDitem>
 
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Distribución de género</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de género</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={2}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">56%</Typography>
-							<Typography variant="description">Hombres</Typography>
+							<Typography align="center" variant="figure">56%</Typography>
+							<Typography align="center" variant="description">Hombres</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">44%</Typography>
-							<Typography variant="description">Mujeres</Typography>
+							<Typography align="center" variant="figure">44%</Typography>
+							<Typography align="center" variant="description">Mujeres</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>
@@ -71,32 +71,32 @@ const Resumen = ({user}) => {
 			</EDitem>
 
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Distribución por edad</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Distribución por edad</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={4}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">4</Typography>
-							<Typography variant="description">0-20</Typography>
+							<Typography align="center" variant="figure">4</Typography>
+							<Typography align="center" variant="description">0-20</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">27</Typography>
-							<Typography variant="description">21-40</Typography>
+							<Typography align="center" variant="figure">27</Typography>
+							<Typography align="center" variant="description">21-40</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">52</Typography>
-							<Typography variant="description">41-60</Typography>
+							<Typography align="center" variant="figure">52</Typography>
+							<Typography align="center" variant="description">41-60</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">26</Typography>
-							<Typography variant="description">+60</Typography>
+							<Typography align="center" variant="figure">26</Typography>
+							<Typography align="center" variant="description">+60</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>
@@ -107,20 +107,20 @@ const Resumen = ({user}) => {
 			</EDitem>
 
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={2}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1%</Typography>
-							<Typography variant="description">Fallecidos</Typography>
+							<Typography align="center" variant="figure">1%</Typography>
+							<Typography align="center" variant="description">Fallecidos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1%</Typography>
-							<Typography variant="description">Sanados</Typography>
+							<Typography align="center" variant="figure">1%</Typography>
+							<Typography align="center" variant="description">Sanados</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>

@@ -46,6 +46,18 @@
 	.m-r-#{$j} {
 		margin-right: #{$j}rem;
 	}
+	.m-b--#{$j} {
+		margin-bottom: -#{$j}rem;
+	}
+	.m-t--#{$j} {
+		margin-top: -#{$j}rem;
+	}
+	.m-l--#{$j} {
+		margin-left: -#{$j}rem;
+	}
+	.m-r--#{$j} {
+		margin-right: -#{$j}rem;
+	}
 }
 
 @for $i from 10 through 100 {

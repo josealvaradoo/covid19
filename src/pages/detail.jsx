@@ -17,26 +17,26 @@ const DetailRegion = ({user}) => {
 		</DetailHeader>
 		<EDContainer>
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Resumen</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Resumen</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={3}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">109</Typography>
-							<Typography variant="description">Casos</Typography>
+							<Typography align="center" variant="figure">109</Typography>
+							<Typography align="center" variant="description">Casos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1</Typography>
-							<Typography variant="description">Fallecidos</Typography>
+							<Typography align="center" variant="figure">1</Typography>
+							<Typography align="center" variant="description">Fallecidos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">1</Typography>
-							<Typography variant="description">Sanados</Typography>
+							<Typography align="center" variant="figure">1</Typography>
+							<Typography align="center" variant="description">Sanados</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>
@@ -45,20 +45,20 @@ const DetailRegion = ({user}) => {
 				<Divider margin={2} spacing={2} />
 			</EDitem>
 			<EDitem sMain="center">
-				<Typography variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
+				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
 			</EDitem>
 			<EDitem>
 				<EDGrid s={2}>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">3%</Typography>
-							<Typography variant="description">Fallecidos</Typography>
+							<Typography align="center" variant="figure">3%</Typography>
+							<Typography align="center" variant="description">Fallecidos</Typography>
 						</EDitem>
 					</EDcolumn>
 					<EDcolumn>
 						<EDitem sMain="center">
-							<Typography variant="figure">3%</Typography>
-							<Typography variant="description">Sanados</Typography>
+							<Typography align="center" variant="figure">3%</Typography>
+							<Typography align="center" variant="description">Sanados</Typography>
 						</EDitem>
 					</EDcolumn>
 				</EDGrid>
