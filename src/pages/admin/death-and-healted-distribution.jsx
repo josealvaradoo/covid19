@@ -30,9 +30,10 @@ const DeathAndHealted = ({handleNotification}) => {
 	}, [pageLoaded]) // eslint-disable-line
 
 	const submit = async (event) => {
+		event.persist()
 		event.preventDefault()
 		const data = {
-			date: `${event.target.date.value}T${moment.format('LTS')}`,
+			date: `${event.target.date.value}T${moment().format('LTS')}`,
 			death: Number(event.target.death.value),
 			healted: Number(event.target.healted.value)
 		}
@@ -59,7 +60,7 @@ const DeathAndHealted = ({handleNotification}) => {
 				<Form onSubmit={submit}>
 					<FormGroup>
 						<Label htmlFor="date">Fecha</Label>
-							<Input type="date" name="cases" border defaultValue={date} />
+							<Input type="date" name="date" border defaultValue={date} />
 					</FormGroup>
 					<FormGroup>
 						<Label htmlFor="death">Muertes confirmadas</Label>

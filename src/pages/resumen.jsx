@@ -16,25 +16,32 @@ import Render from './../helpers/render'
 const Resumen = ({regions}) => {
 	const [genders, setGenders] = useState([])
 	const [ages, setAges] = useState([])
-	const [status, setStatus] = useState([])
 	const [total, setTotal] = useState(0)
+	const [totalDeath, setTotalDeath] = useState(0)
+	const [totalHealted, setTotalHealted] = useState(0)
 	const [pageLoaded, setPageLoadedState] = useState(false)
 	
 	useEffect(() => {
 		(async function() {
 			if(!pageLoaded) {
 				let totalCases = 0
+				let totalCasesDeath = 0
+				let totalCasesHealted = 0
 				const _ages = await CasesService.getByAge()
 				const _status = await CasesService.getByStatus()
 				const _genders = await CasesService.getByGender()
 
 				regions.map(region => totalCases = Number(totalCases + region.cases))
+				_status.map(row => {
+					totalCasesDeath = Number(totalCasesDeath + row.death)
+					totalCasesHealted = Number(totalCasesHealted + row.healted)
+				})
 
 				setTotal(Number(totalCases))
 				setGenders(_genders)
 				setAges(orderBy(_ages, "order"))
-				
-				setStatus(_status)
+				setTotalDeath(totalCasesDeath)
+				setTotalHealted(totalCasesHealted)
 				setPageLoadedState(true)
 			}
 		})()
@@ -63,13 +70,13 @@ const Resumen = ({regions}) => {
 							</EDcolumn>
 							<EDcolumn>
 								<EDitem sMain="center">
-									<Typography align="center" variant="figure">{pageLoaded && status.length > 0 ? status.find(s => s.status === "death").cases : 0}</Typography>
+									<Typography align="center" variant="figure">{pageLoaded ? totalDeath : 0}</Typography>
 									<Typography align="center" variant="description">Fallecidos</Typography>
 								</EDitem>
 							</EDcolumn>
 							<EDcolumn>
 								<EDitem sMain="center">
-									<Typography align="center" variant="figure">{pageLoaded && status.length > 0 ? status.find(s => s.status === "healted").cases : 0}</Typography>
+									<Typography align="center" variant="figure">{pageLoaded ? totalHealted : 0}</Typography>
 									<Typography align="center" variant="description">Sanados</Typography>
 								</EDitem>
 							</EDcolumn>
@@ -134,7 +141,7 @@ const Resumen = ({regions}) => {
 							<EDcolumn>
 								<EDitem sMain="center">
 									<Typography align="center" variant="figure">
-										{pageLoaded && status.length > 0 ? total === 0 ? 0 : Number(status.find(stu => stu.status === "death").cases / total * 100).toFixed(1) : 0}%
+										{pageLoaded ? Number(totalDeath / total * 100).toFixed(1) : 0}%
 									</Typography>
 									<Typography align="center" variant="description">Fallecidos</Typography>
 								</EDitem>
@@ -142,7 +149,7 @@ const Resumen = ({regions}) => {
 							<EDcolumn>
 								<EDitem sMain="center">
 									<Typography align="center" variant="figure">
-										{pageLoaded && status.length > 0 ? total === 0 ? 0 : Number(status.find(stu => stu.status === "healted").cases / total * 100).toFixed(1) : 0}%
+										{pageLoaded ? Number(totalHealted / total * 100).toFixed(1) : 0}%
 									</Typography>
 									<Typography align="center" variant="description">Sanados</Typography>
 								</EDitem>
