@@ -28,7 +28,7 @@ const Login = ({error, user}) => {
 
 	return !user ? (
 		<EDGrid s={1}>
-			<Header />
+			<Header className="m-b-1" />
 			<EDContainer>
 				<EDitem sMain="center">
 					<Image src={doctorsPNG} alt="Coronavirus" width={90} maxWidth={300} className="coronavirus-login" />
@@ -50,7 +50,7 @@ const Login = ({error, user}) => {
 				</EDitem>
 			</EDitem>
 		</EDGrid>
-	) : <Redirect to="/" />
+	) : <Redirect to="/admin" />
 }
 
 Login.defaultProps = {

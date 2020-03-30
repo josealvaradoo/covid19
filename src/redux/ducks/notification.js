@@ -6,7 +6,7 @@ const initialState = {
 	type: null,
 	code: null,
 	message: null
-};
+}
 
 const SET_NOTIFICATION = duck.defineType("SET_NOTIFICATION");
 const SET_NOTIFICATION_CASE = duck.defineType("SET_NOTIFICATION_CASE");
@@ -27,7 +27,13 @@ export default duck.createReducer(
 						type: "success",
 						code: payload.code,
 						message: payload.message
-					};
+					}
+				case "cases/case-created-successfully":
+					return {
+						type: "success",
+						code: payload.code,
+						message: payload.message
+					}
 				default:
 					return state;
 			}
@@ -39,20 +45,34 @@ export default duck.createReducer(
 						type: "error",
 						code: payload.code,
 						message: "El usuario no existe"
-					};
+					}
 				case "auth/wrong-password": {
 					return {
 						type: "error",
 						code: payload.code,
 						message: "Contraseña inválida"
-					};
+					}
 				}
 				case "states/state-not-found": {
 					return {
 						type: "error",
 						code: payload.code,
 						message: payload.message
-					};
+					}
+				}
+				case "states/ages-incomplete": {
+					return {
+						type: "error",
+						code: payload.code,
+						message: payload.message
+					}
+				}
+				case "cases/fields-required": {
+					return {
+						type: "error",
+						code: payload.code,
+						message: payload.message
+					}
 				}
 				default:
 					return state;
@@ -66,7 +86,7 @@ export default duck.createReducer(
 						code: payload.code,
 						message: null,
 						data: payload.data
-					};
+					}
 				default:
 					return state;
 			}

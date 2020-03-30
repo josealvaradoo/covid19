@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 
 const Button = ({className, onClick, type, design, color, children, full, ghost, size, link, to}) => (
 	link ? (
-		<a
-			href={to}
-			className={`button ${className} ${design} ${color} ${full && 'full'} ${ghost && 'ghost'} ${size}`}
-			onClick={onClick}>
+		<Link
+			to={to}
+			className={`button ${className} ${design} ${color} ${full && 'full'} ${ghost && 'ghost'} ${size}`}>
 				{children}
-		</a>
+		</Link>
 	): (
 		<button
 			type={type}

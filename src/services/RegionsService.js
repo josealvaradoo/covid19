@@ -1,21 +1,22 @@
-import Firebase from 'firebase'
+import store from './../redux/store'
+import { loadRegions } from '../redux/ducks/regions'
 // import { v4 as uuid4 } from "uuid";
 
 export default class RegionsService {
 	static async fetchData() {
 		const data = []
-		const database = Firebase.firestore(window.firebaseApp)
-		const collection = database.collection("states")
+		const collection = window.firebaseDB.collection("states")
 		const snapshot = await collection.get()
 
 		snapshot.forEach(document => data.push(document.data()))
+
+		store.dispatch(loadRegions(data))
 
 		return data
 	}
 
 	static async getById(regionId) {
-		const database = Firebase.firestore(window.firebaseApp)
-		const collection = database.collection("states")
+		const collection = window.firebaseDB.collection("states")
 		const doc = collection.doc(regionId)
 		const snapshot = await doc.get()
 
@@ -23,6 +24,14 @@ export default class RegionsService {
 			return null
 		}
 		return snapshot.data();
+	}
+
+	static async update(id, data) {
+		const collection = window.firebaseDB.collection("states")
+		const document = collection.doc(id)
+		document.update(data)
+
+		return true
 	}
 
 	/*
@@ -37,7 +46,7 @@ export default class RegionsService {
 		regions.forEach((_region) => {
 			const uuid = uuid4()
 			const database = Firebase.firestore(window.firebaseApp);
-			const collection = database.collection("states");
+			const collection = window.firebaseDB.collection("states");
 			const doc = collection.doc(uuid);
 
 			doc.set({

@@ -9,9 +9,11 @@ const Logout = ({user}) => {
 	useEffect(() => {
 		(async () => {
 			if(user) {
-				const data = await AuthenticationService.signOut()
-				setRedirectState(data)
+				await AuthenticationService.signOut()
 			}
+			
+			localStorage.clear()
+			setRedirectState(true)
 		})()
 	}, [])
 

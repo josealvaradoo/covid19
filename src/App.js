@@ -1,20 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
 import Router from './router'
 import Notification from './components/notifications/notification'
-import Navbar from './components/navbar/navbar'
+import Drawer from './components/drawer/drawer'
+import { setViewportDimentions } from './redux/ducks/applicaton'
 
-const App = ({menuIsOpen, notification}) => (
-	<div className="App">
-	{notification.code && <Notification />}
-	<Router />
-	<Navbar />
-	</div>
-)
+const App = ({user, menuIsOpen, notification, keyboardOnFocus, handleViewportResize}) => {
+	useEffect(() => {
+		window.addEventListener('resize', () => {
+			handleViewportResize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+				virtualKeyboardIsOpen: keyboardOnFocus && (window.innerHeight < 700)
+			})
+		})
+	}, [keyboardOnFocus])
+
+	return (
+		<div className="App">
+		{notification.code && <Notification />}
+		{menuIsOpen && user && <Drawer />}
+		<Router />
+		</div>
+	)
+}
 
 const mapStateToProps = state => ({
+	user: state.user,
 	menuIsOpen: state.menu,
-	notification: state.notification
+	notification: state.notification,
+	keyboardOnFocus: state.application.keyboardOnFocus
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => ({
+	handleViewportResize(viewport) {
+		dispatch(setViewportDimentions(viewport))
+	}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
 import Button from '../../components/buttons/button';
 import Form from '../../components/forms/form';
 import FormGroup from '../../components/forms/form-group';
@@ -13,102 +14,94 @@ import {orderBy} from './../../helpers/array'
 import { loadRegions } from '../../redux/ducks/regions';
 import EDContainer from '../../components/grid/ed-container';
 import EDitem from '../../components/grid/ed-item';
+import Typography from '../../components/typography/typography';
+import DashboardHeader from '../../components/header/dashboard-header';
+import Avatar from '../../components/user/avatar';
+import {today} from './../../helpers/date' 
 
 const Dashboard = ({setRegionsToReduxStore, regionsState}) => {
+	const [date, setDate] = useState(today())
 	const [regions, fetchRegionsData] = useState([])
 	const [pageLoaded, setPageLoadedState] = useState(false)
-	const [caseSelected, setlectCase] = useState(null)
+	const [regionSelected, selectRegion] = useState(null)
 
 	useEffect(() => {
 		(async function() {
-			if(!pageLoaded) {
-				await fetchRegions()
-			}
+			setDate(today())
+			if(!pageLoaded) await fetchRegions()
 		})()
-	}, [pageLoaded]) // eslint-disable-line
+	}, []) // eslint-disable-line
 
 	const fetchRegions = async () => {
+		const result = []
+
 		if(regionsState.length === 0) {
-			const result = []
 			const data = await RegionsService.fetchData()
-			
 			orderBy(data, 'name').map(item => result.push({value: item.id, label: item.name}))
 
 			fetchRegionsData(result)
 			setRegionsToReduxStore(result)
 		} else {
-			fetchRegionsData(regionsState)
+			orderBy(regionsState, 'name').map(item => result.push({ value: item.id, label: item.name }))
+			fetchRegionsData(result)
 		}
 
 		setPageLoadedState(true)
 	}
 
-	const selectRegionCase = async (event) => {
+	const handleRegionSelector = async (event) => {
 		const regionId = event.target.value
-		const _case = await CasesService.getByRegionId(regionId)
-		
-		if(!_case) {
-			const region = regions.find(item => item.value === regionId)
-			return setlectCase(await CasesService.create({death: 0, healted: 0, cases: 0, state_id: regionId, state: region.label}))
-		}
-
-		setlectCase(_case)
+		selectRegion(await RegionsService.getById(regionId))
 	}
 	
 	const submit = async (event) => {
+		event.persist()
 		event.preventDefault()
 		const data = {
-			...caseSelected,
-			cases: event.target.cases.value,
-			death: event.target.death.value,
-			healted: event.target.healted.value
+			state_id: regionSelected.id,
+			date: `${event.target.date.value}T${moment().format('LTS')}`,
+			cases: Number(event.target.cases.value),
 		}
 
-		CasesService.update(caseSelected.id, data)
-		setlectCase(null)
+		// Update region cases
+		await RegionsService.update(regionSelected.id, {cases: Number(regionSelected.cases + data.cases)})
+
+		// Add new case
+		await CasesService.create(data)
+		
+		// Reset all form fields
+		selectRegion(null)
+		event.target.regions.value = ""
+		event.target.cases.value = 0
+
 		return false
 	}
 
 	return (
-		<EDContainer>
-			<EDitem m={40} className="m-to-center">
-			{
-				pageLoaded && (
-					<Form onSubmit={submit}>
-						{
-							regions.length > 0 && (
-								<FormGroup>
-									<Label htmlFor="regions">Region</Label>
-									<Select name="regions" border placeholder="Selecciona una region" options={regions} onChange={selectRegionCase} />
-								</FormGroup>
-							)
-						}
-						{
-							caseSelected && (
-								<>
-								<FormGroup>
-									<Label htmlFor="cases">Casos confirmados</Label>
-									<Input type="number" name="cases" border defaultValue={Number(caseSelected.cases)} />
-								</FormGroup>
-								<FormGroup>
-									<Label htmlFor="death">Muertes confirmadas</Label>
-									<Input type="number" name="death" border defaultValue={Number(caseSelected.death)} />
-								</FormGroup>
-								<FormGroup>
-									<Label htmlFor="healted">Recuperados confirmados</Label>
-									<Input type="number" name="healted" border defaultValue={Number(caseSelected.healted)} />
-								</FormGroup>
-								<FormGroup>
-									<Button type="submit" color="primary" full>Actualizar {caseSelected.state}</Button>
-								</FormGroup>
-								</>
-							)
-						}
-					</Form>
-				)
-			}
+		<>
+		<DashboardHeader />
+		<EDContainer className="height--60 scroll--auto">
+			<EDitem m={40} className="m-to-center m-t-1">
+				<Form onSubmit={submit}>
+					<FormGroup>
+						<Label htmlFor="regions">Region</Label>
+						<Select name="regions" border placeholder="Selecciona una region" options={regions} onChange={handleRegionSelector} />
+					</FormGroup>
+					<FormGroup>
+						<Label htmlFor="date">Fecha</Label>
+							<Input type="date" name="date" border defaultValue={date} required />
+					</FormGroup>
+					<FormGroup>
+						<Label htmlFor="cases">Casos confirmados</Label>
+						<Input type="number" disabled={!regionSelected} name="cases" border defaultValue={0} min={1} required />
+					</FormGroup>
+					<FormGroup>
+						<Button type="submit" color="primary" full>Agregar</Button>
+					</FormGroup>
+				</Form>
 			</EDitem>
 		</EDContainer>
+		</>
 	)
 }
 

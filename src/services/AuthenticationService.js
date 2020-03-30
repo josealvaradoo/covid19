@@ -7,12 +7,21 @@ export default class AuthenticationService {
 	static async signIn(email, password) {
 		try {
 			const data = await Firebase.auth().signInWithEmailAndPassword(email, password);
+			let user = data.user
 
 			if(data.user) {
-				store.dispatch(setUserData(data.user))
+				const collection = window.firebaseDB.collection('user')
+				const document = collection.doc(data.user.uid)
+				const snapshot = await document.get()
+				const userData = snapshot.data()
+
+				user = {user, ...userData}
+
+				store.dispatch(setUserData(user))
 			}
 
-			return data.user
+			return user
+
 		} catch(error) {
 			store.dispatch(events.setError({
 				code: error.code,

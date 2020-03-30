@@ -1,99 +1,85 @@
 import React, { useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import VenezuelaMap from '../components/map/venezuela-map'
-import CasesService from '../services/CasesService'
+import moment from 'moment'
 import Header from './../components/header/header'
-import Card from '../components/cards/cards'
-import Item, { ItemContent, ItemHeading } from '../components/items/item'
-import EDGrid from '../components/grid/ed-grid'
-import EDcolumn from '../components/grid/ed-column'
-import Carrousel, { CarrouselItem } from '../components/carrousel/carrousel'
 import EDContainer from '../components/grid/ed-container'
 import EDitem from '../components/grid/ed-item'
 import Typography from '../components/typography/typography'
 import Badge from '../components/badge/badge'
-import Span from '../components/typography/span'
+import Item from '../components/items/item'
+import CasesService from '../services/CasesService'
+import Spinner from '../components/helpers/spinner'
+import String from '../helpers/string'
+import Alert from '../components/alerts/alert'
 
-const Notifications = ({user}) => {
-	const [cases, setCases] = useState([])
-	const [total, setTotalCases] = useState(0)
+const Notifications = ({regions}) => {
+	const [cases, fetchCasesData] = useState([])
+	const [pageIsLoaded, setPageLoadesState] = useState(false)
 
 	useEffect(() => {
-		(async () => {
-			/*
-			if(cases.length === 0) {
-				let _total = 0
+		(async function() {
+			if(!pageIsLoaded) {
+				const result = []
 				const data = await CasesService.fetchData()
 
-				data.map(elem => _total += Number(elem.cases))
+				data.map(row => result.push({ ...row, state: regions.find(region => region.id === row.state_id).name }))
 
-				setCases(data)
-				setTotalCases(_total)
+				fetchCasesData(result)
+				setPageLoadesState(true)
 			}
-			*/
 		})()
 	}, [])
 
 	return (
 		<>
 		<Header />
-		<EDContainer>
-			<EDitem className="m-b-1">
-				<Typography variant="subtitle">
-					<Badge color="primary" size="small" style={{marginRight: '.25rem'}} />
-					7 nuevos casos confirmados
-				</Typography>
-				<Typography variant="description" style={{marginTop: '-.25rem'}}>
-					3 en Bolivar, 2 en Amazonas y 2 en Falcon
-					<Span variant="description" style={{marginLeft: '.25rem'}}>(3min ago)</Span>
-				</Typography>
-			</EDitem>
-			<EDitem className="m-b-1">
-				<Typography variant="subtitle">
-					<Badge color="primary" size="small" style={{marginRight: '.25rem'}} />
-					7 nuevos casos confirmados
-				</Typography>
-				<Typography variant="description" style={{marginTop: '-.25rem'}}>
-					3 en Bolivar, 2 en Amazonas y 2 en Falcon
-					<Span variant="description" style={{marginLeft: '.25rem'}}>(3min ago)</Span>
-				</Typography>
-			</EDitem>
-			<EDitem className="m-b-1">
-				<Typography variant="subtitle">
-					<Badge color="primary" size="small" style={{marginRight: '.25rem'}} />
-					7 nuevos casos confirmados
-				</Typography>
-				<Typography variant="description" style={{marginTop: '-.25rem'}}>
-					3 en Bolivar, 2 en Amazonas y 2 en Falcon
-					<Span variant="description" style={{marginLeft: '.25rem'}}>(3min ago)</Span>
-				</Typography>
-			</EDitem>
-			<EDitem className="m-b-1">
-				<Typography variant="subtitle">
-					<Badge color="primary" size="small" style={{marginRight: '.25rem'}} />
-					7 nuevos casos confirmados
-				</Typography>
-				<Typography variant="description" style={{marginTop: '-.25rem'}}>
-					3 en Bolivar, 2 en Amazonas y 2 en Falcon
-					<Span variant="description" style={{marginLeft: '.25rem'}}>(3min ago)</Span>
-				</Typography>
-			</EDitem>
+		<EDContainer className="height--80 scroll--auto s-column">
+		{
+			pageIsLoaded
+			? (
+				cases && cases.length > 0 ? cases.map((item, key) => (
+					<EDitem key={key} className="m-b-1">
+						<Link to={`/detail/${String.slug(item.state)}`}>
+							<Item>
+								<Typography variant="subtitle">
+									<Badge color="primary" size="small" style={{ marginRight: '.5rem' }} />
+									{item.cases} nuevos casos confirmados en {item.state}
+								</Typography>
+								<Typography variant="description" style={{ marginTop: '-.25rem' }}>
+									{moment(item.date, "YYYY-MM-DDTh:mm:ss").fromNow()}
+								</Typography>
+							</Item>
+						</Link>
+					</EDitem>
+				)) : (
+					<EDitem sMain="center" className="m-t-4">
+						<Alert><Typography>Aun no hay datos cargados</Typography></Alert>
+					</EDitem>
+				)
+			)
+			: (
+				<EDitem className="m-t-4">
+					<Spinner />
+				</EDitem>
+			)
+		}
 		</EDContainer>
 		</>
 	)
 }
 
 Notifications.defaultProps = {
-	user: null
+	regions: []
 }
 
 Notifications.propTypes = {
-	user: PropTypes.any
+	regions: PropTypes.array
 }
 
 const mapStateToProps = state => ({
-	user: state.user
+	regions: state.regions
 })
 
 const mapDispatchToProps = dispatch => ({})

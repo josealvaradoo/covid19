@@ -16,7 +16,7 @@ Typography.defaultProps = {
 
 Typography.propTypes = {
 	align: PropTypes.oneOf(["left", "right", "center", "justify"]),
-	variant: PropTypes.oneOf(["text", "title", "figure", "subtitle", "description", "placeholder", "label"]),
+	variant: PropTypes.oneOf(["text", "title", "figure", "figure--xl", "subtitle", "description", "placeholder", "label"]),
 	className: PropTypes.string,
 	children: PropTypes.node.isRequired
 }

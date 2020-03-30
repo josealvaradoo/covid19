@@ -35,10 +35,7 @@ const VenezuelaMap = ({cases}) => {
 	useEffect(() => {
 		const states = []
 		
-		cases.map(_case => {
-			if(_case.cases > 0) states.push(_case.state)
-			return true
-		})
+		cases.map(_case => _case.cases > 0 && states.push(_case.name))
 
 		setStatesWithCoronavirus(states)
 	}, [cases])

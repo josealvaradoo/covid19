@@ -1,0 +1,29 @@
+.spinner {
+	display: table;
+	margin: auto;
+	--size: 4rem;
+	position: relative;
+	width: var(--size);
+	height: var(--size);
+	background: linear-gradient(to right, var(--primary-color) 10% , transparent 90%);
+	border-radius: 100px;
+	animation: spinner 1s infinite;
+	@keyframes spinner {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	&::before {
+		content: "";
+		position: absolute;
+		top: calc(var(--size) * .05);
+		left: calc(var(--size) * .05);
+		width: calc(var(--size) * .90);
+		height: calc(var(--size) * .90);
+		background-color: white;
+		border-radius: 100px;
+	}
+}

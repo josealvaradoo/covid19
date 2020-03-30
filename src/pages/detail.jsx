@@ -7,77 +7,65 @@ import EDitem from '../components/grid/ed-item'
 import Typography from '../components/typography/typography'
 import EDGrid from '../components/grid/ed-grid'
 import EDcolumn from '../components/grid/ed-column'
-import Divider from '../components/helpers/divider'
+import Spinner from './../components/helpers/spinner'
 
-const DetailRegion = ({user}) => {
+const DetailRegion = ({match, regions}) => {
+	const [region, setRegion] = useState(null)
+
+	useEffect(() => {
+		const slug = match.params.region
+		setRegion(regions.find(r => r.slug === slug))
+	}, [region])
+
 	return (
 		<>
-		<DetailHeader>
-			Venezuela
+			<DetailHeader className="large" image={region ? region.image : "https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540"}>
+			{region && region.name}
 		</DetailHeader>
 		<EDContainer>
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Resumen</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={3}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">109</Typography>
-							<Typography align="center" variant="description">Casos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1</Typography>
-							<Typography align="center" variant="description">Fallecidos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1</Typography>
-							<Typography align="center" variant="description">Sanados</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
-			<EDitem>
-				<Divider margin={2} spacing={2} />
-			</EDitem>
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={2}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">3%</Typography>
-							<Typography align="center" variant="description">Fallecidos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">3%</Typography>
-							<Typography align="center" variant="description">Sanados</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
+			{
+				region
+				? (
+					<>
+					<EDitem sMain="center">
+						<Typography align="center" variant="subtitle" className="m-b-4">Resumen</Typography>
+					</EDitem>
+					<EDitem>
+						<EDGrid s={1}>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure--xl">{region.cases}</Typography>
+									<Typography align="center" variant="description">Casos</Typography>
+								</EDitem>
+							</EDcolumn>
+						</EDGrid>
+					</EDitem>
+					</>
+				)
+				: (
+					<EDitem className="m-t-4">
+						<Spinner />
+					</EDitem>
+				)
+			}
 		</EDContainer>
 		</>
 	)
 }
 
 DetailRegion.defaultProps = {
-	user: null
+	user: null,
+	regions: []
 }
 
 DetailRegion.propTypes = {
-	user: PropTypes.any
+	user: PropTypes.any,
+	regions: PropTypes.array
 }
 
 const mapStateToProps = state => ({
-	user: state.user
+	user: state.user,
+	regions: state.regions
 })
 
 const mapDispatchToProps = dispatch => ({})

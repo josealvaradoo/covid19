@@ -1,0 +1,30 @@
+[class*=alert] {
+	display: inline-flex;
+	align-items: center;
+	background: #fff;
+	border: 1px solid var(--alert-color);
+	color: var(--alert-color);
+	line-height: 1;
+	padding: 1rem;
+	border-radius: .5rem;
+	&.alert--primary {
+		--alert-color: var(--primary-color);
+	}
+	&.alert--warning {
+		--alert-color: var(--warning-color);
+	}
+	&.alert--success {
+		--alert-color: var(--success-color);
+	}
+	&.alert--danger {
+		--alert-color: var(--danger-color);
+	}
+	&.full {
+		width: 100%;
+		display: flex;
+	}
+	p {
+		margin: 0;
+		padding: 0;
+	}
+}

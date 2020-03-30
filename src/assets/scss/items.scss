@@ -1,9 +1,9 @@
 .item {
 	position: relative;
-	margin-bottom: 1rem;
 	background-color: var(--item-background);
 	border-radius: .55rem;
 	padding: 1rem;
+	border: var(--border-light);
 	box-shadow: $shadow-1;
 	&-heading {
 		font-weight: bold;
@@ -29,12 +29,13 @@
 .drawer-list__item {
 	a {
 		display: block;
-		padding: 1rem 2rem;
+		padding: .75rem 1rem;
 		text-decoration: none;
-		color: inherit
+		color: inherit;
+		font-size: .85rem;
 	}
 	[class*=fa] {
-		margin-right: 1rem;
+		margin-right: .5rem;
 	}
 	&:hover {
 		background-color: #EEEEEE;

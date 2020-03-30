@@ -36,7 +36,7 @@ EDitem.propTypes = {
 	sOrder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	mOrder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	lgOrder: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-	sOrderMain: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	sMain: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	mMain: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	lgMain: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	sCross: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

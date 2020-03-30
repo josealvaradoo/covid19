@@ -8,138 +8,169 @@ import Typography from '../components/typography/typography'
 import EDGrid from '../components/grid/ed-grid'
 import EDcolumn from '../components/grid/ed-column'
 import Divider from '../components/helpers/divider'
+import CasesService from '../services/CasesService'
+import {orderBy} from './../helpers/array'
+import Spinner from './../components/helpers/spinner'
+import Render from './../helpers/render'
 
-const Resumen = ({user}) => {
+const Resumen = ({regions}) => {
+	const [genders, setGenders] = useState([])
+	const [ages, setAges] = useState([])
+	const [status, setStatus] = useState([])
+	const [total, setTotal] = useState(0)
+	const [pageLoaded, setPageLoadedState] = useState(false)
+	
+	useEffect(() => {
+		(async function() {
+			if(!pageLoaded) {
+				let totalCases = 0
+				const _ages = await CasesService.getByAge()
+				const _status = await CasesService.getByStatus()
+				const _genders = await CasesService.getByGender()
+
+				regions.map(region => totalCases = Number(totalCases + region.cases))
+
+				setTotal(Number(totalCases))
+				setGenders(_genders)
+				setAges(orderBy(_ages, "order"))
+				
+				setStatus(_status)
+				setPageLoadedState(true)
+			}
+		})()
+	}, [pageLoaded])
+
 	return (
 		<>
-			<DetailHeader image="https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540">
+		<DetailHeader image="https://res.cloudinary.com/leetchi/image/upload/c_fill,f_auto,fl_lossy,g_center,h_520,q_80,w_715/v1539897994/1fd1f62b-aed6-4052-89ed-7cad52774419.jpg">
 			Venezuela
 		</DetailHeader>
-		<EDContainer>
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Resumen</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={3}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">109</Typography>
-							<Typography align="center" variant="description">Casos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1</Typography>
-							<Typography align="center" variant="description">Fallecidos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1</Typography>
-							<Typography align="center" variant="description">Sanados</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
+		<EDContainer className="scroll--y height--70 p-b-1">
+			{
+				pageLoaded
+				? (
+					<>
+					<EDitem sMain="center">
+						<Typography align="center" variant="subtitle" className="m-b-1">Resumen</Typography>
+					</EDitem>
+					<EDitem>
+						<EDGrid s={3}>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure">{total}</Typography>
+									<Typography align="center" variant="description">Casos</Typography>
+								</EDitem>
+							</EDcolumn>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure">{pageLoaded && status.length > 0 ? status.find(s => s.status === "death").cases : 0}</Typography>
+									<Typography align="center" variant="description">Fallecidos</Typography>
+								</EDitem>
+							</EDcolumn>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure">{pageLoaded && status.length > 0 ? status.find(s => s.status === "healted").cases : 0}</Typography>
+									<Typography align="center" variant="description">Sanados</Typography>
+								</EDitem>
+							</EDcolumn>
+						</EDGrid>
+					</EDitem>
 
-			<EDitem>
-				<Divider margin={2} spacing={1} />
-			</EDitem>
+					<EDitem>
+						<Divider margin={2} spacing={1} />
+					</EDitem>
 
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de género</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={2}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">56%</Typography>
-							<Typography align="center" variant="description">Hombres</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">44%</Typography>
-							<Typography align="center" variant="description">Mujeres</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
+					<EDitem sMain="center">
+						<Typography align="center" variant="subtitle" className="m-b-1">Distribución de género</Typography>
+					</EDitem>
+					<EDitem>
+						<EDContainer sMain="center">
+							{
+								pageLoaded && genders.map((gender, key) => (
+									<EDitem key={key} s="1-3" sMain="center">
+										<Typography align="center" variant="figure">{gender.cases}</Typography>
+										<Typography align="center" variant="description">
+											{gender.gender === "men" && "Hombres"}
+											{gender.gender === "women" && "Mujeres"}
+											{gender.gender === "S/I" && "S/I"}
+										</Typography>
+									</EDitem>
+								))
+							}
+						</EDContainer>
+					</EDitem>
 
-			<EDitem>
-				<Divider margin={2} spacing={1} />
-			</EDitem>
+					<EDitem>
+						<Divider margin={2} spacing={1} />
+					</EDitem>
 
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Distribución por edad</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={4}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">4</Typography>
-							<Typography align="center" variant="description">0-20</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">27</Typography>
-							<Typography align="center" variant="description">21-40</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">52</Typography>
-							<Typography align="center" variant="description">41-60</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">26</Typography>
-							<Typography align="center" variant="description">+60</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
+					<EDitem sMain="center">
+						<Typography align="center" variant="subtitle" className="m-b-1">Distribución por edad</Typography>
+					</EDitem>
+					<EDitem>
+						<EDContainer sMain="center">
+							{
+								pageLoaded && ages.map((age, key) => (
+									<EDitem key={key} s="1-3" sMain="center" className={` ${key < 3 && "m-b-1"} `}>
+										<Typography align="center" variant="figure">{age.cases}</Typography>
+										<Typography align="center" variant="description">
+											{age.range}
+										</Typography>
+									</EDitem>
+								))
+							}
+						</EDContainer>
+					</EDitem>
 
-			<EDitem>
-				<Divider margin={2} spacing={1} />
-			</EDitem>
+					<EDitem>
+						<Divider margin={2} spacing={1} />
+					</EDitem>
 
-			<EDitem sMain="center">
-				<Typography align="center" variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
-			</EDitem>
-			<EDitem>
-				<EDGrid s={2}>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1%</Typography>
-							<Typography align="center" variant="description">Fallecidos</Typography>
-						</EDitem>
-					</EDcolumn>
-					<EDcolumn>
-						<EDitem sMain="center">
-							<Typography align="center" variant="figure">1%</Typography>
-							<Typography align="center" variant="description">Sanados</Typography>
-						</EDitem>
-					</EDcolumn>
-				</EDGrid>
-			</EDitem>
+					<EDitem sMain="center">
+						<Typography align="center" variant="subtitle" className="m-b-1">Distribución de fallecidos y sanados</Typography>
+					</EDitem>
+					<EDitem>
+						<EDGrid s={2}>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure">
+										{pageLoaded && status.length > 0 ? total === 0 ? 0 : Number(status.find(stu => stu.status === "death").cases / total * 100).toFixed(1) : 0}%
+									</Typography>
+									<Typography align="center" variant="description">Fallecidos</Typography>
+								</EDitem>
+							</EDcolumn>
+							<EDcolumn>
+								<EDitem sMain="center">
+									<Typography align="center" variant="figure">
+										{pageLoaded && status.length > 0 ? total === 0 ? 0 : Number(status.find(stu => stu.status === "healted").cases / total * 100).toFixed(1) : 0}%
+									</Typography>
+									<Typography align="center" variant="description">Sanados</Typography>
+								</EDitem>
+							</EDcolumn>
+						</EDGrid>
+					</EDitem>
+					</>
+				) : (
+					<EDitem className="m-t-4">
+						<Spinner />	
+					</EDitem>
+				)
+			}
 		</EDContainer>
 		</>
 	)
 }
 
 Resumen.defaultProps = {
-	user: null
+	regions: []
 }
 
 Resumen.propTypes = {
-	user: PropTypes.any
+	regions: PropTypes.array
 }
 
 const mapStateToProps = state => ({
-	user: state.user
+	regions: state.regions
 })
 
 const mapDispatchToProps = dispatch => ({})

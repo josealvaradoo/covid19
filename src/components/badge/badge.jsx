@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Badge = ({color, children, size, className, ...rest}) => (
-	<div className={`badge--${size} ${color} ${className}`} {...rest}>{children}</div>
+	<span className={`badge--${size} ${color} ${className}`} {...rest}>{children}</span>
 );
 
 Badge.defaultProps = {

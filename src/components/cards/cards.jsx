@@ -1,10 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import Button from '../buttons/button'
 
-const Card = ({className, children, image, link}) => (
+const Card = ({className, children, image}) => (
 	<div className={`card ${className}`} style={{backgroundImage: `url(${image})`}}>
-		<Button link to={link} className="button--card">
+		<Button className="button--card">
 			{children}
 		</Button>
 	</div>

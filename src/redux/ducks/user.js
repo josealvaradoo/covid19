@@ -17,7 +17,7 @@ export default duck.createReducer(
 			return payload;
 		},
 		[REMOVE_USER]: (state, { payload }) => {
-			localStorage.removeItem('user');
+			localStorage.clear()
 			return null
 		}
 	},

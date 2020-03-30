@@ -11,6 +11,7 @@ body,
 	--coronavirus-disabled: #EEEEEE;
 	--main-background: white;
 	--border: 1px solid #ccc;
+	--border-light: 1px solid #eee;
 	&.dark {
 		--primary-color: var(--danger-color);
 		--success-color: #4CAF50;

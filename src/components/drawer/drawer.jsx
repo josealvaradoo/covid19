@@ -9,13 +9,12 @@ const Drawer = ({toggle, user}) => (
 	<div className="drawer-container" onClick={toggle}>
 		<div className="drawer">
 			<DrawerList>
-				<DrawerItem icon="notes-medical" to="/">Vista general</DrawerItem>
-				{/* <DrawerItem icon="chart-bar" to="/graphics">Gráfica</DrawerItem> */}
-				{
-					user
-					? <DrawerItem icon="user" to="/logout">Cerrar sesión</DrawerItem>
-					: <DrawerItem icon="user" to="/login">Iniciar sesión</DrawerItem>
-				}
+				<DrawerItem icon="plus" to="/admin">Agregar nuevos casos</DrawerItem>
+				<DrawerItem icon="notes-medical" to="/admin/death-and-healted">Fallecidos y sanados</DrawerItem>
+				<DrawerItem icon="chart-bar" to="/admin/age">Distribución por edad</DrawerItem>
+				<DrawerItem icon="chart-bar" to="/admin/gender">Distribución por género</DrawerItem>
+				<DrawerItem icon="user" to="/profile">Mi perfil</DrawerItem>
+				<DrawerItem icon="sign-out" to="/logout">Cerrar sesión</DrawerItem>
 			</DrawerList>
 		</div>
 	</div>
