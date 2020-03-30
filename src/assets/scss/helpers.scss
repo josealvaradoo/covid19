@@ -87,3 +87,7 @@
 		overflow-y: auto;
 	}
 }
+
+[class*=main-justify] {
+	justify-content: space-between;
+}

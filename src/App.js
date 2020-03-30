@@ -14,6 +14,11 @@ const App = ({user, menuIsOpen, notification, keyboardOnFocus, handleViewportRes
 				virtualKeyboardIsOpen: keyboardOnFocus && (window.innerHeight < 700)
 			})
 		})
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+			window.deferredPrompt = e;
+		})
 	}, [keyboardOnFocus])
 
 	return (

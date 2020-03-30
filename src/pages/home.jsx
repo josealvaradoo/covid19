@@ -13,6 +13,7 @@ import Viewport from '../helpers/viewport'
 import RegionsService from '../services/RegionsService'
 import String from '../helpers/string'
 import Spinner from './../components/helpers/spinner'
+import {orderBy} from './../helpers/array'
 
 const Home = ({regions, viewport}) => {
 	const [total, setTotalCases] = useState(0)
@@ -54,7 +55,7 @@ const Home = ({regions, viewport}) => {
 					? (
 						<Carrousel className={`${Viewport.isATailScreenSmartphone() && "m-t-1 increased"}`}>
 							{
-								regions.map((region, key) => (
+								orderBy(regions, 'name').map((region, key) => (
 									<CarrouselItem key={key}>
 										<Link to={`/detail/${String.slug(region.name)}`}>
 											<Card image={region.image}>{region.name}</Card>

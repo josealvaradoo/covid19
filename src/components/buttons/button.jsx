@@ -24,7 +24,7 @@ Button.propTypes = {
 	onClick: PropTypes.func,
 	design: PropTypes.oneOf(['raised', 'flat', 'circle']),
 	color: PropTypes.oneOf(['primary', 'success', 'warning', 'danger']),
-	size: PropTypes.oneOf(['normal', 'small', 'large']),
+	size: PropTypes.oneOf(['normal', 'small', 'smallest', 'large']),
 	children: PropTypes.any,
 	full: PropTypes.bool,
 	ghost: PropTypes.bool,
