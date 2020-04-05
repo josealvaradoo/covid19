@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import Header from './../components/header/header'
@@ -30,10 +31,13 @@ const Notifications = ({regions}) => {
 				setPageLoadesState(true)
 			}
 		})()
-	}, [])
+	}, [pageIsLoaded, regions])
 
 	return (
 		<>
+		<Helmet>
+			<title>Notificaciones - Coronavirus en Venezuela</title>
+		</Helmet>
 		<Header />
 		<EDContainer className="height--80 scroll--auto s-column">
 		{

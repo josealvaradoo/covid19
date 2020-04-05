@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 export const today = () => {
 	const date = new Date()
 	const day = `${date.getDate()}`.length === 1 ? `0${date.getDate()}` : date.getDate()

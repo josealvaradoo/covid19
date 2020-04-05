@@ -1,4 +1,5 @@
 import React, { useEffect, useState} from 'react'
+import {Helmet} from 'react-helmet'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -29,13 +30,15 @@ const Home = ({regions, viewport}) => {
 
 				setTotalCases(_total)
 				setPageLoadedState(true)
-				console.log("Request")
 			}
 		})()
-	}, [])
+	}, [pageLoaded])
 
 	return (
 		<>
+		<Helmet>
+			<title>Coronavirus en Venezuela</title>
+		</Helmet>
 		<Header />
 		<EDGrid m={2}>
 			<EDcolumn>

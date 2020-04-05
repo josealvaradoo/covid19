@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import Header from './../components/header/header'
 import Form from '../components/forms/form';
@@ -15,6 +16,7 @@ import EDContainer from '../components/grid/ed-container';
 import EDitem from '../components/grid/ed-item';
 
 const Login = ({error, user}) => {
+
 	const signIn = async (e) => {
 		if(!user) {
 			e.preventDefault()
@@ -27,6 +29,10 @@ const Login = ({error, user}) => {
 	}
 
 	return !user ? (
+		<>
+		<Helmet>
+			<title>Login - Coronavirus en Venezuela</title>
+		</Helmet>
 		<EDGrid s={1}>
 			<Header className="m-b-1" />
 			<EDContainer>
@@ -50,6 +56,7 @@ const Login = ({error, user}) => {
 				</EDitem>
 			</EDitem>
 		</EDGrid>
+		</>
 	) : <Redirect to="/admin" />
 }
 

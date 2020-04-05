@@ -5,12 +5,9 @@ import Form from '../../components/forms/form';
 import FormGroup from '../../components/forms/form-group';
 import Label from '../../components/inputs/label';
 import Input from '../../components/inputs/input';
-import PropTypes from 'prop-types'
 import EDContainer from '../../components/grid/ed-container';
 import EDitem from '../../components/grid/ed-item';
-import Typography from '../../components/typography/typography';
 import DashboardHeader from '../../components/header/dashboard-header';
-import Avatar from '../../components/user/avatar';
 import Spinner from '../../components/helpers/spinner';
 import RegionsService from './../../services/RegionsService'
 import CasesService from './../../services/CasesService'
@@ -36,7 +33,7 @@ const AgeDistribution = ({handleNotification}) => {
 				setPageLoadedState(true)
 			}
 		})()
-	}, [])
+	}, [pageLoaded])
 	
 	const submit = async (event) => {
 		event.preventDefault()
@@ -57,6 +54,8 @@ const AgeDistribution = ({handleNotification}) => {
 			})
 
 			_total += Number(submitAges[index])
+
+			return true
 		})
 
 		if(_total !== total) {

@@ -14,9 +14,7 @@ import {orderBy} from './../../helpers/array'
 import { loadRegions } from '../../redux/ducks/regions';
 import EDContainer from '../../components/grid/ed-container';
 import EDitem from '../../components/grid/ed-item';
-import Typography from '../../components/typography/typography';
 import DashboardHeader from '../../components/header/dashboard-header';
-import Avatar from '../../components/user/avatar';
 import {today} from './../../helpers/date' 
 
 const Dashboard = ({setRegionsToReduxStore, regionsState}) => {

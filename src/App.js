@@ -4,6 +4,7 @@ import Router from './router'
 import Notification from './components/notifications/notification'
 import Drawer from './components/drawer/drawer'
 import { setViewportDimentions } from './redux/ducks/applicaton'
+import GoogleAnalytics from './helpers/google-analytics'
 
 const App = ({user, menuIsOpen, notification, keyboardOnFocus, handleViewportResize}) => {
 	useEffect(() => {
@@ -19,7 +20,10 @@ const App = ({user, menuIsOpen, notification, keyboardOnFocus, handleViewportRes
 			e.preventDefault();
 			window.deferredPrompt = e;
 		})
-	}, [keyboardOnFocus])
+
+		// Config React Google Analytics
+		GoogleAnalytics.init('G-1Z9EC2W9JB')
+	}, [keyboardOnFocus, handleViewportResize])
 
 	return (
 		<div className="App">

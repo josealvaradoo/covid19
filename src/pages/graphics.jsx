@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
+import {Helmet} from 'react-helmet'
 import Header from './../components/header/header'
 import EDContainer from '../components/grid/ed-container'
 import EDitem from '../components/grid/ed-item'
@@ -10,6 +10,9 @@ import Alert from '../components/alerts/alert'
 const Graphics = ({user}) => {
 	return (
 		<>
+		<Helmet>
+			<title>Estadísticas - Coronavirus en Venezuela</title>
+		</Helmet>
 		<Header />
 		<EDContainer sMain="center">
 			<EDitem sMain="center"  className="m-t-4">

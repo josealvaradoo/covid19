@@ -106,6 +106,7 @@ export default class CasesService {
 		data.map(age => {
 			const document = collection.doc(age.id)
 			document.update({cases: age.cases})
+			return true
 		})
 
 		store.dispatch(events.setNotification({
@@ -123,6 +124,7 @@ export default class CasesService {
 		data.map(gender => {
 			const document = collection.doc(gender.id)
 			document.update({cases: gender.cases})
+			return true
 		})
 
 		store.dispatch(events.setNotification({

@@ -15,7 +15,7 @@ const DetailHeader = ({children, className, image}) => (
 )
 
 DetailHeader.propTypes = {
-	children: PropTypes.string.isRequired,
+	children: PropTypes.node,
 	className: PropTypes.string,
 	image: PropTypes.string.isRequired
 }

@@ -6,22 +6,39 @@ import EDitem from '../grid/ed-item'
 import AppTitle from '../typography/app-title.'
 import Button from './../buttons/button'
 import Viewport from '../../helpers/viewport'
+import GoogleAnalytics from '../../helpers/google-analytics'
 
 const Header = ({className}) => {
 	const [buttonHidden, hideButton] = useState(false)
 
 	useEffect(() => {
-		if(Viewport.isInStandaloneMode()) hideButton(true)
+		if(Viewport.isInStandaloneMode()) {
+			hideButton(true)
+
+			GoogleAnalytics.event('visit_from_pwa', {
+				event_category: 'PWA',
+				event_label: 'Visit from PWA',
+				event_action: 'visit from pwa'
+			})
+		}
 	}, [])
 
 	const installPWA = () => {
-		window.deferredPrompt.prompt()
+		if (window.deferredPrompt) {
+			window.deferredPrompt.prompt()
 		
-		window.deferredPrompt.userChoice.then(choiceResult => {
-			if(choiceResult.outcome === "accepted") {
-				hideButton(true)
-			}
-		})
+			window.deferredPrompt.userChoice.then(choiceResult => {
+				if(choiceResult.outcome === "accepted") {
+					hideButton(true)
+					
+					GoogleAnalytics.event('install_pwa', {
+						event_category: 'PWA',
+						event_label: 'Install PWA',
+						event_action: 'install pwa'
+					})
+				}
+			})
+		}
 
 		window.addEventListener('appinstalled', event => {
 			hideButton(true)

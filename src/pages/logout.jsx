@@ -15,7 +15,7 @@ const Logout = ({user}) => {
 			localStorage.clear()
 			setRedirectState(true)
 		})()
-	}, [])
+	}, [user])
 
 	return redirect && <Redirect to="/" />
 }

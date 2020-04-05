@@ -2,6 +2,7 @@ import Firebase from "firebase";
 import store from './../redux/store'
 import {events} from './../redux/ducks/notification'
 import {setUserData, removeUserData} from './../redux/ducks/user'
+import GoogleAnalytics from "../helpers/google-analytics";
 
 export default class AuthenticationService {
 	static async signIn(email, password) {
@@ -18,6 +19,12 @@ export default class AuthenticationService {
 				user = {user, ...userData}
 
 				store.dispatch(setUserData(user))
+
+				GoogleAnalytics.event('login', {
+					event_category: 'User',
+					event_label: 'Login',
+					event_action: 'login'
+				})
 			}
 
 			return user

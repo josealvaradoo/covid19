@@ -1,5 +1,4 @@
 import { createDuck } from "redux-duck";
-import store from './../store'
 
 const duck = createDuck("application");
 

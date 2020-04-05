@@ -1,5 +1,6 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useReducer} from 'react'
 import {connect} from 'react-redux'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import DetailHeader from './../components/header/detail-header'
 import EDContainer from '../components/grid/ed-container'
@@ -10,16 +11,23 @@ import EDcolumn from '../components/grid/ed-column'
 import Spinner from './../components/helpers/spinner'
 
 const DetailRegion = ({match, regions}) => {
-	const [region, setRegion] = useState(null)
+	const [region, setRegion] = useReducer(null)
 
 	useEffect(() => {
 		const slug = match.params.region
 		setRegion(regions.find(r => r.slug === slug))
-	}, [region])
+	}, [regions, match.params.region])
 
 	return (
 		<>
-			<DetailHeader className="large" image={region ? region.image : "https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540"}>
+		{
+			region && (
+				<Helmet>
+					<title>{region.name} - Coronavirus en Venezuela</title>
+				</Helmet>
+			)
+		}
+		<DetailHeader className="large" image={region ? region.image : "https://i1.wp.com/mejoreszonas.com/wp-content/uploads/2018/11/Mejores-zonas-donde-alojarse-en-Caracas-Venezuela.jpg?resize=1100,540"}>
 			{region && region.name}
 		</DetailHeader>
 		<EDContainer>

@@ -5,13 +5,11 @@ import Form from '../../components/forms/form';
 import FormGroup from '../../components/forms/form-group';
 import Label from '../../components/inputs/label';
 import Input from '../../components/inputs/input';
-import PropTypes from 'prop-types'
 import EDContainer from '../../components/grid/ed-container';
 import EDitem from '../../components/grid/ed-item';
 import DashboardHeader from '../../components/header/dashboard-header';
 import RegionsService from './../../services/RegionsService'
 import CasesService from './../../services/CasesService'
-import { orderBy } from './../../helpers/array'
 import Spinner from '../../components/helpers/spinner';
 import { setError } from '../../redux/ducks/notification';
 
@@ -27,14 +25,14 @@ const GenderDistribution = ({handleNotification}) => {
 				const _regions = await RegionsService.fetchData()
 				const _genders = await CasesService.getByGender()
 
-				_regions.map(region => _total += Number(region.cases))
+				_regions.map(region => 	_total += Number(region.cases))
 
 				setGendersDistribution(_genders, 'order')
 				setTotalCases(_total)
 				setPageLoadedState(true)
 			}
 		})()
-	}, [])
+	}, [pageLoaded])
 
 	const submit = async (event) => {
 		event.preventDefault()
@@ -54,6 +52,7 @@ const GenderDistribution = ({handleNotification}) => {
 			})
 
 			_total += Number(submitGenders[index])
+			return true
 		})
 
 		if (_total !== total) {

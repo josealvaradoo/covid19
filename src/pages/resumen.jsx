@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import DetailHeader from './../components/header/detail-header'
 import EDContainer from '../components/grid/ed-container'
@@ -11,7 +12,7 @@ import Divider from '../components/helpers/divider'
 import CasesService from '../services/CasesService'
 import {orderBy} from './../helpers/array'
 import Spinner from './../components/helpers/spinner'
-import Render from './../helpers/render'
+import GoogleAnalytics from '../helpers/google-analytics'
 
 const Resumen = ({regions}) => {
 	const [genders, setGenders] = useState([])
@@ -35,6 +36,7 @@ const Resumen = ({regions}) => {
 				_status.map(row => {
 					totalCasesDeath = Number(totalCasesDeath + row.death)
 					totalCasesHealted = Number(totalCasesHealted + row.healted)
+					return true
 				})
 
 				setTotal(Number(totalCases))
@@ -43,12 +45,21 @@ const Resumen = ({regions}) => {
 				setTotalDeath(totalCasesDeath)
 				setTotalHealted(totalCasesHealted)
 				setPageLoadedState(true)
+
+				GoogleAnalytics.event('watch_resume', {
+					event_category: 'User',
+					event_label: 'User watches resume',
+					event_action: 'watch_resume'
+				})
 			}
 		})()
-	}, [pageLoaded])
+	}, [pageLoaded, regions])
 
 	return (
 		<>
+		<Helmet>
+			<title>Resumen - Coronavirus en Venezuela</title>
+		</Helmet>
 		<DetailHeader image="https://res.cloudinary.com/leetchi/image/upload/c_fill,f_auto,fl_lossy,g_center,h_520,q_80,w_715/v1539897994/1fd1f62b-aed6-4052-89ed-7cad52774419.jpg">
 			Venezuela
 		</DetailHeader>
